@@ -15,20 +15,26 @@
     background-size: cover;
 }
 
-        .login-box {
-            width: 350px;
-            padding: 40px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            text-align: center;
-        }
+       .login-box {
+    width: 350px;
+    padding: 40px;
+
+    /* Move to left */
+    position: absolute;
+    top: 50%;           /* vertical center */
+    left: 10%;          /* adjust horizontal position, e.g., 10% from left */
+    transform: translateY(-50%);  /* only vertical centering */
+
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    color: black;
+    text-align: center;
+}
 
         .login-box h2 {
             margin-bottom: 20px;
