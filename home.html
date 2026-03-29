@@ -7,67 +7,126 @@
 <style>
 body{
     margin:0;
-    font-family: Arial;
-}
-
-/* Navbar */
-.navbar{
-    background:#28a745;
-    padding:15px;
-    color:white;
+    font-family: Arial, sans-serif;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    background:#f5f7fa;
 }
 
-.nav-links a{
+/* Sidebar */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background: linear-gradient(#1e7e34,#28a745);
     color:white;
-    margin:0 15px;
+    padding-top:20px;
+    position:fixed;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:15px;
     text-decoration:none;
     font-weight:bold;
 }
 
-.nav-links a:hover{
-    text-decoration:underline;
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
 }
 
-/* Content */
-.content{
-    padding:40px;
+/* Main Content */
+.main{
+    margin-left:220px;
+    padding:20px;
+    width:100%;
+}
+
+/* Hero Banner */
+.hero{
+    background:url('campus-banner.jpg') no-repeat center/cover;
+    height:180px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    padding-left:20px;
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+/* Cards */
+.container{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
 }
 
 .card{
-    background:#f4f4f4;
+    background:white;
     padding:20px;
-    margin:20px 0;
-    border-radius:8px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    color:#28a745;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="navbar">
-    <h2>Student Dashboard</h2>
-    <div class="nav-links">
-        <a href="home.html">Home</a>
-        <a href="canteen.html">Canteen Info</a>
-        <a href="menu.html">Daily Menu</a>
-        <a href="updates.html">Quick Updates</a>
-        <a href="feedback.html">Feedback</a>
-    </div>
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="home.html">🏠 Home</a>
+    <a href="canteen.html">🏫 Canteen Info</a>
+    <a href="menu.html">🍽 Daily Menu</a>
+    <a href="updates.html">📢 Quick Updates</a>
+    <a href="feedback.html">📝 Feedback</a>
 </div>
 
-<div class="content">
-    <div class="card">
-        <h3>Welcome Student</h3>
-        <p>Access daily menu, canteen updates, and give feedback here.</p>
-    </div>
+<div class="main">
 
-    <div class="card">
-        <h3>Today's Highlight</h3>
-        <p>Check today's special meal in Daily Menu section.</p>
-    </div>
+<div class="hero">
+Alliance University Food Management System
+</div>
+
+<div class="container">
+
+<div class="card">
+<h3>🍽 Today's Menu</h3>
+<p>Check breakfast, lunch and snacks available today.</p>
+</div>
+
+<div class="card">
+<h3>📢 Announcements</h3>
+<p>See latest canteen updates and notices.</p>
+</div>
+
+<div class="card">
+<h3>🏫 Canteen Info</h3>
+<p>View canteen timings and location.</p>
+</div>
+
+<div class="card">
+<h3>📝 Give Feedback</h3>
+<p>Share your suggestions for improvement.</p>
+</div>
+
+</div>
+
 </div>
 
 </body>
