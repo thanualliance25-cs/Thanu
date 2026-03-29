@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canteen Information</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
+}
+
+/* Topbar */
+.topbar{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* Sidebar */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#1b5e20;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:15px;
+    text-decoration:none;
+}
+
+.sidebar a:hover{
+    background:#2e7d32;
+}
+
+/* Main */
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+/* Glass card */
+.card{
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.2);
+}
+
+.card h2{
+    color:#1b5e20;
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .main{
+        margin-left:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+Canteen Information
+</div>
+
+<div class="sidebar">
+<a href="home.html">🏠 Home</a>
+<a href="canteen.html">🍛 Canteen Info</a>
+<a href="menu.html">🍽 Daily Menu</a>
+<a href="updates.html">📢 Quick Updates</a>
+<a href="feedback.html">📝 Feedback</a>
+</div>
+
+<div class="main">
+
+<div class="card">
+
+<h2>🍛 Alliance University Canteen</h2>
+
+<p><strong>📍 Location:</strong> Near Academic Block A, Alliance University Campus</p>
+
+<p><strong>⏰ Timings:</strong></p>
+<ul>
+<li>Breakfast: 8:00 AM – 10:30 AM</li>
+<li>Lunch: 12:00 PM – 3:00 PM</li>
+<li>Snacks: 4:00 PM – 6:00 PM</li>
+<li>Dinner: 7:00 PM – 9:00 PM</li>
+</ul>
+
+<p><strong>🍽 Facilities Available:</strong></p>
+<ul>
+<li>South Indian Meals</li>
+<li>North Indian Meals</li>
+<li>Snacks & Beverages</li>
+<li>Juice Counter</li>
+<li>Online Payment (UPI)</li>
+<li>Seating Area</li>
+</ul>
+
+<p><strong>☎️ Contact:</strong> Canteen Office – +91 XXXXX XXXXX</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
