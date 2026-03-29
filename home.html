@@ -2,29 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Dashboard</title>
 
 <style>
+
 body{
     margin:0;
-    font-family: Arial, sans-serif;
-    display:flex;
-    background:#f5f7fa;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+/* Top bar */
+.topbar{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
 }
 
 /* Sidebar */
 .sidebar{
     width:220px;
     height:100vh;
-    background: linear-gradient(#1e7e34,#28a745);
-    color:white;
-    padding-top:20px;
+    background:#1b5e20;
     position:fixed;
-}
-
-.sidebar h2{
-    text-align:center;
-    margin-bottom:30px;
+    padding-top:20px;
 }
 
 .sidebar a{
@@ -32,83 +36,86 @@ body{
     color:white;
     padding:15px;
     text-decoration:none;
-    font-weight:bold;
+    font-size:16px;
 }
 
 .sidebar a:hover{
-    background:rgba(255,255,255,0.2);
+    background:#2e7d32;
 }
 
-/* Main Content */
+/* Main content */
 .main{
     margin-left:220px;
     padding:20px;
-    width:100%;
 }
 
-/* Hero Banner */
+/* Hero banner */
 .hero{
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('banner1.jpg')
-                no-repeat center/cover;
-    height:180px;
+                url('banner1.jpg') no-repeat center/cover;
+    height:350px;
     border-radius:10px;
     display:flex;
     align-items:center;
-    padding-left:20px;
+    justify-content:center;
     color:white;
-    font-size:26px;
+    font-size:32px;
     font-weight:bold;
-}
-
-/* Cards */
-.container{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-}
-
-.card h3{
-    color:#28a745;
+    text-shadow:2px 2px 5px rgba(0,0,0,0.8);
 }
 
 /* Footer */
 .footer{
-    margin-top:40px;
+    margin-top:20px;
     padding:15px;
+    background:white;
+    border-radius:8px;
     text-align:center;
-    background:#ffffff;
-    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
     font-size:14px;
-    color:#555;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
 }
-</style>
 
+/* Mobile responsive */
+@media (max-width:768px){
+
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .hero{
+        height:200px;
+        font-size:22px;
+        padding:10px;
+        text-align:center;
+    }
+
+    .topbar{
+        text-align:center;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
+<div class="topbar">
+Student Dashboard
+</div>
+
 <div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="home.html">Home</a>
-    <a href="canteen.html">🍛Canteen Info</a>
-    <a href="menu.html">🍽 Daily Menu</a>
-    <a href="updates.html">📢 Quick Updates</a>
-    <a href="feedback.html">📝 Feedback</a>
+<a href="home.html">🏠 Home</a>
+<a href="canteen.html">🍛 Canteen Info</a>
+<a href="menu.html">🍽 Daily Menu</a>
+<a href="updates.html">📢 Quick Updates</a>
+<a href="feedback.html">📝 Feedback</a>
 </div>
 
 <div class="main">
@@ -117,32 +124,8 @@ body{
 WELCOME, STUDENT!
 </div>
 
-<div class="container">
-
-<div class="card">
-<h3>🍽 Today's Menu</h3>
-<p>Check breakfast, lunch and snacks available today.</p>
-</div>
-
-<div class="card">
-<h3>📢 Announcements</h3>
-<p>See latest canteen updates and notices.</p>
-</div>
-
-<div class="card">
-<h3>🏫 Canteen Info</h3>
-<p>View canteen timings and location.</p>
-</div>
-
-<div class="card">
-<h3>📝 Give Feedback</h3>
-<p>Share your suggestions for improvement.</p>
-</div>
-
-</div>
-
 <div class="footer">
-<b>Alliance University</b><br>
+<strong>Alliance University</strong><br>
 Chikkahagade Cross, Chandapura-Anekal Main Road,<br>
 Anekal, Bengaluru - 562106, Karnataka, India
 </div>
