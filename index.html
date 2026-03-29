@@ -70,8 +70,25 @@
     <h2>Student Login</h2>
     <input type="text" placeholder="Username">
     <input type="password" placeholder="Password">
-    <button>Login</button>
+    <button onclick="login()">Login</button>
 </div>
+
+<!-- ADD SCRIPT HERE -->
+<script>
+function login() {
+
+    var username = document.querySelector('input[type="text"]').value;
+    var password = document.querySelector('input[type="password"]').value;
+
+    // check if email is Alliance student email
+    if(username.endsWith("@stu.alliance.edu.in") && password.length >= 4){
+        window.location.href = "home.html";
+    }
+    else{
+        alert("Enter valid college email and password");
+    }
+}
+</script>
 
 </body>
 </html>
