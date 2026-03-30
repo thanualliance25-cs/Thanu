@@ -60,7 +60,6 @@ body{
 
 .card h2{
     color:#1b5e20;
-    margin-bottom:10px;
 }
 
 .card p{
@@ -68,12 +67,7 @@ body{
     line-height:1.6;
 }
 
-.card ul{
-    margin-top:5px;
-    margin-bottom:15px;
-}
-
-/* Image gallery */
+/* Gallery */
 .gallery{
     display:flex;
     gap:15px;
@@ -87,6 +81,35 @@ body{
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
+/* Glass info cards */
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+    margin-top:20px;
+}
+
+.glass-card{
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.glass-card h3{
+    margin-top:0;
+    color:#1b5e20;
+}
+
+.glass-card ul{
+    padding-left:18px;
+    margin:0;
+}
+
+/* Mobile */
 @media (max-width:768px){
 
     .sidebar{
@@ -132,22 +155,28 @@ The university’s modern and well-lit dining halls provide students with a comf
 </p>
 
 <div class="gallery">
-    <img src="image1.jpg" alt="Canteen View">
-    <img src="image2.jpg" alt="Seating Area">
-    <img src="image3.jpg" alt="Food Counter">
+    <img src="canteen1.jpg" alt="Canteen View">
+    <img src="canteen2.jpg" alt="Seating Area">
+    <img src="canteen3.jpg" alt="Food Counter">
 </div>
 
-<p><strong>📍 Location:</strong> Alliance University Campus</p>
+<div class="info-grid">
 
-<p><strong>⏰ Timings:</strong></p>
-<ul>
-<li>Breakfast: 8:00 AM – 10:30 AM</li>
-<li>Lunch: 12:00 PM – 3:00 PM</li>
-<li>Snacks: 4:00 PM – 6:00 PM</li>
-<li>Dinner: 7:00 PM – 9:00 PM</li>
-</ul>
+<div class="glass-card">
+<h3>📍 Location</h3>
+<p>Alliance University Campus</p>
+</div>
 
-<p><strong>🍽 Facilities Available:</strong></p>
+<div class="glass-card">
+<h3>⏰ Timings</h3>
+<p>Breakfast: 8:00 AM – 10:30 AM</p>
+<p>Lunch: 12:00 PM – 3:00 PM</p>
+<p>Snacks: 4:00 PM – 6:00 PM</p>
+<p>Dinner: 7:00 PM – 9:00 PM</p>
+</div>
+
+<div class="glass-card">
+<h3>🍽 Facilities Available</h3>
 <ul>
 <li>South Indian Meals</li>
 <li>North Indian Meals</li>
@@ -156,8 +185,14 @@ The university’s modern and well-lit dining halls provide students with a comf
 <li>Online Payment (UPI)</li>
 <li>Seating Area</li>
 </ul>
+</div>
 
-<p><strong>☎️ Contact:</strong> Canteen Office – +91 9876542310</p>
+<div class="glass-card">
+<h3>☎️ Contact</h3>
+<p>Canteen Office – +91 9876542310</p>
+</div>
+
+</div>
 
 </div>
 
