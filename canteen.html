@@ -10,7 +10,7 @@
 /* Body */
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI', sans-serif;
     background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
 }
 
@@ -31,6 +31,7 @@ body{
     background:#1b5e20;
     position:fixed;
     padding-top:20px;
+    overflow-y:auto;
 }
 
 .sidebar a{
@@ -38,7 +39,6 @@ body{
     color:white;
     padding:15px;
     text-decoration:none;
-    font-size:16px;
 }
 
 .sidebar a:hover,
@@ -63,6 +63,7 @@ body{
     animation: fadeIn 0.8s ease-in;
 }
 
+/* Heading */
 .card h2{
     color:#1b5e20;
 }
@@ -75,29 +76,45 @@ hr{
     margin-bottom:15px;
 }
 
-.card p{
-    text-align:justify;
-    line-height:1.6;
-}
-
-/* Gallery */
-.gallery{
+/* Top Section Layout */
+.top-section{
     display:flex;
-    gap:15px;
-    margin:20px 0;
+    gap:20px;
+    align-items:center;
     flex-wrap:wrap;
 }
 
-.gallery img{
-    width:32%;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+/* Text */
+.text{
+    flex:1;
+    line-height:1.6;
+    text-align:justify;
 }
 
-.gallery img:hover{
-    transform: scale(1.05);
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+/* Right Image */
+.side-image img{
+    width:350px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Bottom Gallery */
+.bottom-gallery{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.bottom-gallery img{
+    width:48%;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+.bottom-gallery img:hover{
+    transform:scale(1.05);
 }
 
 /* Info Grid */
@@ -105,7 +122,7 @@ hr{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:20px;
-    margin-top:20px;
+    margin-top:25px;
 }
 
 .glass-card{
@@ -157,7 +174,11 @@ hr{
         margin-left:0;
     }
 
-    .gallery img{
+    .side-image img{
+        width:100%;
+    }
+
+    .bottom-gallery img{
         width:100%;
     }
 }
@@ -173,7 +194,7 @@ hr{
 
 <div class="sidebar">
 <a href="home.html">🏠 Home</a>
-<a href="canteen.html" class="active"> Canteen Info</a>
+<a href="canteen.html" class="active">🍛 Canteen Info</a>
 <a href="menu.html">🍽 Daily Menu</a>
 <a href="updates.html">📢 Quick Updates</a>
 <a href="feedback.html">📝 Feedback</a>
@@ -183,21 +204,33 @@ hr{
 
 <div class="card">
 
-<h2>ALLIANCE UNIVERSITY FOOD COURT</h2>
+<h2>Alliance University Canteen</h2>
 <hr>
 
-<p>
-The university’s modern and well-lit dining halls provide students with a comfortable and hygienic dining experience. A state-of-the-art kitchen equipped with advanced facilities ensures a wide array of multi-cuisine delicacies are served under proper hygienic conditions.
-</p>
+<!-- TOP SECTION -->
+<div class="top-section">
 
-<!-- ✅ FIXED GALLERY -->
-<div class="gallery">
-    <img src="image1.jpg">
-    <img src="image2.jpg">
-    <img src="image3.jpg">
+    <!-- TEXT -->
+    <div class="text">
+        <p>
+        The university’s modern and well-lit dining halls provide students with a comfortable and hygienic dining experience. A state-of-the-art kitchen equipped with advanced facilities ensures a wide array of multi-cuisine delicacies are served under proper hygienic conditions. The university is engaged with one of the finest caterers in the health and education sector, with a proven track record in culinary expertise and chefs from Taj. The food service is available on a self-service basis. Apart from the daily menu at the food court, Aromas—one of the restaurants on campus—provides best-in-class multi-cuisine dishes to the student community and university members.
+        </p>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="side-image">
+        <img src="image1.jpg" alt="Canteen">
+    </div>
+
 </div>
 
-<!-- Info Section -->
+<!-- BOTTOM IMAGES -->
+<div class="bottom-gallery">
+    <img src="image2.jpg" alt="Seating Area">
+    <img src="image3.jpg" alt="Food Counter">
+</div>
+
+<!-- INFO GRID -->
 <div class="info-grid">
 
 <div class="glass-card">
@@ -218,8 +251,8 @@ The university’s modern and well-lit dining halls provide students with a comf
 <ul>
 <li>South Indian Meals</li>
 <li>North Indian Meals</li>
-<li>Jain Food</li>
-<li>Ice Cream</li>
+<li>Snacks & Beverages</li>
+<li>Juice Counter</li>
 <li>Online Payment (UPI)</li>
 <li>Seating Area</li>
 </ul>
@@ -227,14 +260,13 @@ The university’s modern and well-lit dining halls provide students with a comf
 
 <div class="glass-card">
 <h3>📞 Contact</h3>
-<p>Canteen Office – +919876542310</p>
+<p>Canteen Office – +91 9876542310</p>
 </div>
 
 </div>
 
 </div>
 
-<!-- Footer -->
 <div class="footer">
 © 2026 Alliance University | Food Management System
 </div>
