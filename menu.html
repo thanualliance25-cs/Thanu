@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daily Menu</title>
+
+<style>
+body{
+    font-family:Arial;
+    background:#e8f5e9;
+    margin:0;
+}
+
+.topbar{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+}
+
+.container{
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin:10px 0;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">🍽 Daily Menu</div>
+
+<div class="container">
+
+<div class="card">
+<h3>Breakfast</h3>
+<p id="breakfast"></p>
+</div>
+
+<div class="card">
+<h3>Lunch</h3>
+<p id="lunch"></p>
+</div>
+
+<div class="card">
+<h3>Snacks</h3>
+<p id="snacks"></p>
+</div>
+
+<div class="card">
+<h3>Dinner</h3>
+<p id="dinner"></p>
+</div>
+
+</div>
+
+<script>
+document.getElementById("breakfast").innerText = localStorage.getItem("breakfast") || "Not updated";
+document.getElementById("lunch").innerText = localStorage.getItem("lunch") || "Not updated";
+document.getElementById("snacks").innerText = localStorage.getItem("snacks") || "Not updated";
+document.getElementById("dinner").innerText = localStorage.getItem("dinner") || "Not updated";
+</script>
+
+</body>
+</html>
