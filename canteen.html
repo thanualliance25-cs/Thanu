@@ -60,9 +60,33 @@ body{
 
 .card h2{
     color:#1b5e20;
+    margin-bottom:10px;
 }
 
-/* Mobile */
+.card p{
+    text-align:justify;
+    line-height:1.6;
+}
+
+.card ul{
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+/* Image gallery */
+.gallery{
+    display:flex;
+    gap:15px;
+    margin:15px 0;
+    flex-wrap:wrap;
+}
+
+.gallery img{
+    width:32%;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
 @media (max-width:768px){
 
     .sidebar{
@@ -73,6 +97,10 @@ body{
 
     .main{
         margin-left:0;
+    }
+
+    .gallery img{
+        width:100%;
     }
 }
 
@@ -99,7 +127,17 @@ Canteen Information
 
 <h2>🍛 Alliance University Canteen</h2>
 
-<p><strong>📍 Location:</strong> Near Academic Block A, Alliance University Campus</p>
+<p>
+The university’s modern and well-lit dining halls provide students with a comfortable and hygienic dining experience. A state-of-the-art kitchen equipped with advanced facilities ensures a wide array of multi-cuisine delicacies are served under proper hygienic conditions. The university is engaged with one of the finest caterers in the health and education sector, with a proven track record in culinary expertise and chefs from Taj. The food service is available on a self-service basis. Apart from the daily menu at the food court, Aromas—one of the restaurants on campus—provides best-in-class multi-cuisine dishes to the student community and university members.
+</p>
+
+<div class="gallery">
+    <img src="image1.jpg" alt="Canteen View">
+    <img src="image2.jpg" alt="Seating Area">
+    <img src="image3.jpg" alt="Food Counter">
+</div>
+
+<p><strong>📍 Location:</strong> Alliance University Campus</p>
 
 <p><strong>⏰ Timings:</strong></p>
 <ul>
@@ -119,7 +157,7 @@ Canteen Information
 <li>Seating Area</li>
 </ul>
 
-<p><strong>☎️ Contact:</strong> Canteen Office – +91 XXXXX XXXXX</p>
+<p><strong>☎️ Contact:</strong> Canteen Office – +91 9876542310</p>
 
 </div>
 
