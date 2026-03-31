@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background: linear-gradient(135deg,#c8e6c9,#e8f5e9);
+}
+
+.topbar{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    font-size:22px;
+}
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#1b5e20;
+    position:fixed;
+    top:60px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:15px;
+    text-decoration:none;
+}
+
+.main{
+    margin-left:220px;
+    padding:20px;
+    margin-top:60px;
+}
+
+/* Card */
+.card{
+    background: rgba(255,255,255,0.3);
+    padding:25px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    max-width:500px;
+    margin:auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">📝 Feedback</div>
+
+<div class="sidebar">
+<a href="home.html">🏠 Home</a>
+<a href="menu.html">🍽 Daily Menu</a>
+<a href="updates.html">📢 Quick Updates</a>
+<a href="feedback.html">📝 Feedback</a>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h2>Give Your Feedback</h2>
+
+<input type="text" id="name" placeholder="Your Name">
+<textarea id="message" placeholder="Write your feedback..."></textarea>
+
+<button onclick="submitFeedback()">Submit</button>
+</div>
+
+</div>
+
+<script>
+
+function submitFeedback(){
+    let name = document.getElementById("name").value;
+    let msg = document.getElementById("message").value;
+
+    if(name==="" || msg===""){
+        alert("Fill all fields!");
+        return;
+    }
+
+    let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    feedbacks.push({
+        name:name,
+        message:msg,
+        time:new Date().toLocaleString()
+    });
+
+    localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+
+    alert("✅ Feedback Submitted!");
+
+    document.getElementById("name").value="";
+    document.getElementById("message").value="";
+}
+
+</script>
+
+</body>
+</html>
