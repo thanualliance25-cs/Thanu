@@ -6,12 +6,14 @@
 <title>Admin Panel</title>
 
 <style>
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#f4f6f9;
 }
 
+/* Topbar */
 .topbar{
     background:#2e7d32;
     color:white;
@@ -20,6 +22,7 @@ body{
     font-weight:bold;
 }
 
+/* Sidebar */
 .sidebar{
     width:220px;
     height:100vh;
@@ -41,12 +44,14 @@ body{
     background:#2e7d32;
 }
 
+/* Main */
 .main{
     margin-left:220px;
     padding:20px;
     margin-top:60px;
 }
 
+/* Card */
 .card{
     background:white;
     padding:20px;
@@ -55,6 +60,7 @@ body{
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Inputs */
 input, textarea{
     width:100%;
     padding:10px;
@@ -63,6 +69,7 @@ input, textarea{
     border:1px solid #ccc;
 }
 
+/* Button */
 button{
     padding:10px;
     background:#2e7d32;
@@ -76,6 +83,15 @@ button:hover{
     background:#1b5e20;
 }
 
+/* Feedback Box */
+.feedback-box{
+    background:#f1f1f1;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+}
+
+/* Mobile */
 @media (max-width:768px){
     .sidebar{
         width:100%;
@@ -89,6 +105,7 @@ button:hover{
         margin-top:0;
     }
 }
+
 </style>
 </head>
 
@@ -102,11 +119,12 @@ Admin Panel - Staff Interface
 <a href="#" class="active">📊 Dashboard</a>
 <a href="#menu">🍽 Update Menu</a>
 <a href="#updates">📢 Quick Updates</a>
+<a href="#feedback">📝 View Feedback</a>
 </div>
 
 <div class="main">
 
-<!-- MENU -->
+<!-- 🍽 MENU -->
 <div class="card" id="menu">
 <h2>Update Daily Menu (Buffet System)</h2>
 
@@ -129,7 +147,7 @@ Admin Panel - Staff Interface
 <button onclick="saveMenu()">Save Menu</button>
 </div>
 
-<!-- UPDATES -->
+<!-- 📢 QUICK UPDATES -->
 <div class="card" id="updates">
 <h2>Post Quick Update</h2>
 
@@ -139,22 +157,35 @@ Admin Panel - Staff Interface
 <button onclick="saveUpdate()">Post Update</button>
 </div>
 
+<!-- 📝 FEEDBACK -->
+<div class="card" id="feedback">
+<h2>Student Feedback</h2>
+<div id="feedbackList"></div>
+</div>
+
+</div>
+
 <script>
 
+/* 🍽 SAVE MENU */
 function saveMenu(){
+
     localStorage.setItem("breakfastItems", breakfastItems.value);
     localStorage.setItem("breakfastPrice", breakfastPrice.value);
+
     localStorage.setItem("lunchItems", lunchItems.value);
     localStorage.setItem("lunchPrice", lunchPrice.value);
+
     localStorage.setItem("snacksItems", snacksItems.value);
     localStorage.setItem("snacksPrice", snacksPrice.value);
+
     localStorage.setItem("dinnerItems", dinnerItems.value);
     localStorage.setItem("dinnerPrice", dinnerPrice.value);
 
-    alert("✅ Menu Updated!");
+    alert("✅ Menu Updated Successfully!");
 }
 
-/* UPDATE WITH PRICE */
+/* 📢 SAVE UPDATE */
 function saveUpdate(){
     let update = updateText.value;
     let price = updatePrice.value;
@@ -168,11 +199,34 @@ function saveUpdate(){
     localStorage.setItem("updatePrice", price);
     localStorage.setItem("updateTime", new Date().toLocaleString());
 
-    alert("📢 Update Posted!");
+    alert("📢 Update Posted Successfully!");
 
     updateText.value = "";
     updatePrice.value = "";
 }
+
+/* 📝 LOAD FEEDBACK */
+function loadFeedback(){
+
+    let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    let output = "";
+
+    feedbacks.forEach(f => {
+        output += `
+        <div class="feedback-box">
+            <strong>${f.name}</strong><br>
+            ${f.message}<br>
+            <small>${f.time}</small>
+        </div>
+        `;
+    });
+
+    document.getElementById("feedbackList").innerHTML =
+        output || "No feedback yet";
+}
+
+loadFeedback();
 
 </script>
 
