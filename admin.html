@@ -7,29 +7,53 @@
 
 <style>
 
+/* BODY WITH BACKGROUND */
 body{
     margin:0;
     font-family:Arial;
-    background:#f4f6f9;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('campus-banner.jpg') no-repeat center center;
+    background-size: cover;
 }
 
-/* LOGIN BOX */
+/* 🔐 LOGIN BOX (GLASS EFFECT) */
 .login-box{
     width:350px;
     padding:30px;
-    background:white;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    border-radius:10px;
-    box-shadow:0 0 20px rgba(0,0,0,0.2);
+    border-radius:15px;
+    box-shadow:0 0 25px rgba(0,0,0,0.5);
+    color:white;
+}
+
+.login-box h2{
+    text-align:center;
 }
 
 .login-box input{
     width:100%;
     padding:10px;
     margin:10px 0;
+    border-radius:5px;
+    border:none;
+}
+
+.login-box button{
+    width:100%;
+    margin-top:10px;
+}
+
+/* 🛠 ADMIN PANEL (hidden initially) */
+#adminContent{
+    display:none;
+    background:#f4f6f9;
+    min-height:100vh;
 }
 
 /* TOPBAR */
@@ -38,6 +62,7 @@ body{
     color:white;
     padding:15px;
     font-size:22px;
+    font-weight:bold;
 }
 
 /* SIDEBAR */
@@ -73,6 +98,16 @@ body{
     padding:20px;
     margin-bottom:20px;
     border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* INPUTS */
+textarea, input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
 }
 
 /* BUTTON */
@@ -81,7 +116,7 @@ button{
     background:#2e7d32;
     color:white;
     border:none;
-    margin-top:5px;
+    border-radius:5px;
     cursor:pointer;
 }
 
@@ -95,11 +130,6 @@ button:hover{
     padding:10px;
     margin:10px 0;
     border-radius:5px;
-}
-
-/* HIDE ADMIN INITIALLY */
-#adminContent{
-    display:none;
 }
 
 </style>
@@ -117,7 +147,9 @@ button:hover{
 <button onclick="adminLogin()">Login</button>
 <button onclick="resetPassword()">Forgot Password?</button>
 
-<p style="font-size:12px; color:gray;">Demo system (no real email verification)</p>
+<p style="font-size:12px; color:#eee; text-align:center;">
+Demo system (no real email verification)
+</p>
 </div>
 
 <!-- 🛠 ADMIN PANEL -->
@@ -139,7 +171,7 @@ button:hover{
 <h2>Update Menu</h2>
 
 <textarea id="breakfastItems" placeholder="Breakfast Items"></textarea>
-<input id="breakfastPrice" placeholder="Price">
+<input id="breakfastPrice" placeholder="Total Price">
 
 <button onclick="saveMenu()">Save Menu</button>
 </div>
@@ -234,12 +266,31 @@ function saveMenu(){
     alert("✅ Menu saved!");
 }
 
-/* 📢 SAVE UPDATE */
+/* 📢 SAVE UPDATE (MULTIPLE UPDATES) */
 function saveUpdate(){
-    localStorage.setItem("update", updateText.value);
-    localStorage.setItem("updatePrice", updatePrice.value);
-    localStorage.setItem("updateTime", new Date().toLocaleString());
+
+    let text = updateText.value;
+    let price = updatePrice.value;
+
+    if(text.trim() === ""){
+        alert("Enter update!");
+        return;
+    }
+
+    let updates = JSON.parse(localStorage.getItem("updatesList")) || [];
+
+    updates.push({
+        text: text,
+        price: price,
+        time: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("updatesList", JSON.stringify(updates));
+
     alert("📢 Update posted!");
+
+    updateText.value = "";
+    updatePrice.value = "";
 }
 
 /* 📝 LOAD FEEDBACK */
