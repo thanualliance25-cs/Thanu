@@ -6,15 +6,12 @@
 <title>Admin Panel</title>
 
 <style>
-
-/* Body */
 body{
     margin:0;
     font-family:Arial, sans-serif;
     background:#f4f6f9;
 }
 
-/* Topbar */
 .topbar{
     background:#2e7d32;
     color:white;
@@ -23,7 +20,6 @@ body{
     font-weight:bold;
 }
 
-/* Sidebar */
 .sidebar{
     width:220px;
     height:100vh;
@@ -45,14 +41,12 @@ body{
     background:#2e7d32;
 }
 
-/* Main */
 .main{
     margin-left:220px;
     padding:20px;
     margin-top:60px;
 }
 
-/* Card */
 .card{
     background:white;
     padding:20px;
@@ -61,7 +55,6 @@ body{
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Inputs */
 input, textarea{
     width:100%;
     padding:10px;
@@ -70,7 +63,6 @@ input, textarea{
     border:1px solid #ccc;
 }
 
-/* Button */
 button{
     padding:10px;
     background:#2e7d32;
@@ -84,7 +76,6 @@ button:hover{
     background:#1b5e20;
 }
 
-/* Mobile */
 @media (max-width:768px){
     .sidebar{
         width:100%;
@@ -98,7 +89,6 @@ button:hover{
         margin-top:0;
     }
 }
-
 </style>
 </head>
 
@@ -116,12 +106,12 @@ Admin Panel - Staff Interface
 
 <div class="main">
 
-<!-- 🍽 MENU SECTION -->
+<!-- MENU -->
 <div class="card" id="menu">
 <h2>Update Daily Menu (Buffet System)</h2>
 
 <label>Breakfast Items</label>
-<textarea id="breakfastItems" placeholder="Idli, Lemon Rice, Bread & Jam"></textarea>
+<textarea id="breakfastItems"></textarea>
 <input type="text" id="breakfastPrice" placeholder="Total Price (₹)">
 
 <label>Lunch Items</label>
@@ -139,48 +129,35 @@ Admin Panel - Staff Interface
 <button onclick="saveMenu()">Save Menu</button>
 </div>
 
-<!-- 📢 QUICK UPDATES -->
+<!-- UPDATES -->
 <div class="card" id="updates">
 <h2>Post Quick Update</h2>
 
 <textarea id="updateText" placeholder="Enter update..."></textarea>
+<input type="text" id="updatePrice" placeholder="Optional Price (₹)">
 
 <button onclick="saveUpdate()">Post Update</button>
 </div>
 
 <script>
 
-/* 🍽 SAVE MENU */
 function saveMenu(){
+    localStorage.setItem("breakfastItems", breakfastItems.value);
+    localStorage.setItem("breakfastPrice", breakfastPrice.value);
+    localStorage.setItem("lunchItems", lunchItems.value);
+    localStorage.setItem("lunchPrice", lunchPrice.value);
+    localStorage.setItem("snacksItems", snacksItems.value);
+    localStorage.setItem("snacksPrice", snacksPrice.value);
+    localStorage.setItem("dinnerItems", dinnerItems.value);
+    localStorage.setItem("dinnerPrice", dinnerPrice.value);
 
-    localStorage.setItem("breakfastItems", document.getElementById("breakfastItems").value);
-    localStorage.setItem("breakfastPrice", document.getElementById("breakfastPrice").value);
-
-    localStorage.setItem("lunchItems", document.getElementById("lunchItems").value);
-    localStorage.setItem("lunchPrice", document.getElementById("lunchPrice").value);
-
-    localStorage.setItem("snacksItems", document.getElementById("snacksItems").value);
-    localStorage.setItem("snacksPrice", document.getElementById("snacksPrice").value);
-
-    localStorage.setItem("dinnerItems", document.getElementById("dinnerItems").value);
-    localStorage.setItem("dinnerPrice", document.getElementById("dinnerPrice").value);
-
-    alert("✅ Menu Updated Successfully!");
-
-    // Clear inputs
-    document.getElementById("breakfastItems").value = "";
-    document.getElementById("breakfastPrice").value = "";
-    document.getElementById("lunchItems").value = "";
-    document.getElementById("lunchPrice").value = "";
-    document.getElementById("snacksItems").value = "";
-    document.getElementById("snacksPrice").value = "";
-    document.getElementById("dinnerItems").value = "";
-    document.getElementById("dinnerPrice").value = "";
+    alert("✅ Menu Updated!");
 }
 
-/* 📢 SAVE UPDATE */
+/* UPDATE WITH PRICE */
 function saveUpdate(){
-    let update = document.getElementById("updateText").value;
+    let update = updateText.value;
+    let price = updatePrice.value;
 
     if(update.trim() === ""){
         alert("⚠️ Enter something!");
@@ -188,12 +165,13 @@ function saveUpdate(){
     }
 
     localStorage.setItem("update", update);
+    localStorage.setItem("updatePrice", price);
     localStorage.setItem("updateTime", new Date().toLocaleString());
 
-    alert("📢 Update Posted Successfully!");
+    alert("📢 Update Posted!");
 
-    // Clear box
-    document.getElementById("updateText").value = "";
+    updateText.value = "";
+    updatePrice.value = "";
 }
 
 </script>
