@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+
+<style>
+
+/* Body */
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+/* Topbar */
+.topbar{
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* Sidebar */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#1b5e20;
+    position:fixed;
+    padding-top:20px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    padding:15px;
+    text-decoration:none;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#2e7d32;
+}
+
+/* Main */
+.main{
+    margin-left:220px;
+    padding:20px;
+}
+
+/* Card */
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+/* Button */
+button{
+    padding:10px;
+    background:#2e7d32;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b5e20;
+}
+
+/* Mobile */
+@media (max-width:768px){
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
+
+    .main{
+        margin-left:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+Admin Panel - Staff Interface
+</div>
+
+<div class="sidebar">
+<a href="#" class="active">📊 Dashboard</a>
+<a href="#menu">🍽 Update Menu</a>
+<a href="#updates">📢 Quick Updates</a>
+<a href="#token">🎟 Token Control</a>
+</div>
+
+<div class="main">
+
+<!-- 🍽 MENU SECTION -->
+<div class="card" id="menu">
+<h2>Update Daily Menu (Buffet System)</h2>
+
+<label>Breakfast Items</label>
+<textarea id="breakfastItems" placeholder="Idli, Lemon Rice, Bread & Jam"></textarea>
+<input type="text" id="breakfastPrice" placeholder="Total Price (₹)">
+
+<label>Lunch Items</label>
+<textarea id="lunchItems"></textarea>
+<input type="text" id="lunchPrice" placeholder="Total Price (₹)">
+
+<label>Snacks Items</label>
+<textarea id="snacksItems"></textarea>
+<input type="text" id="snacksPrice" placeholder="Total Price (₹)">
+
+<label>Dinner Items</label>
+<textarea id="dinnerItems"></textarea>
+<input type="text" id="dinnerPrice" placeholder="Total Price (₹)">
+
+<button onclick="saveMenu()">Save Menu</button>
+</div>
+
+<!-- 📢 QUICK UPDATES -->
+<div class="card" id="updates">
+<h2>Post Quick Update</h2>
+
+<textarea id="updateText" placeholder="Enter update..."></textarea>
+
+<button onclick="saveUpdate()">Post Update</button>
+</div>
+
+<!-- 🎟 TOKEN CONTROL -->
+<div class="card" id="token">
+<h2>Token Payment Control</h2>
+
+<p id="adminToken"></p>
+<p id="adminMeal"></p>
+<p id="adminStatus"></p>
+
+<button onclick="markPaid()">Mark as Paid</button>
+</div>
+
+</div>
+
+<script>
+
+/* 🍽 SAVE MENU */
+function saveMenu(){
+
+    localStorage.setItem("breakfastItems", document.getElementById("breakfastItems").value);
+    localStorage.setItem("breakfastPrice", document.getElementById("breakfastPrice").value);
+
+    localStorage.setItem("lunchItems", document.getElementById("lunchItems").value);
+    localStorage.setItem("lunchPrice", document.getElementById("lunchPrice").value);
+
+    localStorage.setItem("snacksItems", document.getElementById("snacksItems").value);
+    localStorage.setItem("snacksPrice", document.getElementById("snacksPrice").value);
+
+    localStorage.setItem("dinnerItems", document.getElementById("dinnerItems").value);
+    localStorage.setItem("dinnerPrice", document.getElementById("dinnerPrice").value);
+
+    alert("Menu Updated Successfully!");
+}
+
+/* 📢 SAVE UPDATE */
+function saveUpdate(){
+    let update = document.getElementById("updateText").value;
+
+    if(update.trim() === ""){
+        alert("Enter something!");
+        return;
+    }
+
+    localStorage.setItem("update", update);
+    alert("Update Posted!");
+}
+
+/* 🎟 LOAD TOKEN INFO */
+window.onload = function(){
+
+    document.getElementById("adminToken").innerText =
+        "Token: " + (localStorage.getItem("token") || "--");
+
+    document.getElementById("adminMeal").innerText =
+        "Meal: " + (localStorage.getItem("meal") || "--");
+
+    let status = localStorage.getItem("status");
+
+    if(status === "paid"){
+        document.getElementById("adminStatus").innerText = "Status: ✅ Paid";
+    } else {
+        document.getElementById("adminStatus").innerText = "Status: ❌ Not Paid";
+    }
+}
+
+/* 🎟 MARK AS PAID */
+function markPaid(){
+    localStorage.setItem("status", "paid");
+    alert("Payment Confirmed!");
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>
