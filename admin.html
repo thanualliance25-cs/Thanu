@@ -149,19 +149,6 @@ Admin Panel - Staff Interface
 <button onclick="saveUpdate()">Post Update</button>
 </div>
 
-<!-- 🎟 TOKEN CONTROL -->
-<div class="card" id="token">
-<h2>Token Payment Control</h2>
-
-<p id="adminToken"></p>
-<p id="adminMeal"></p>
-<p id="adminStatus"></p>
-
-<button onclick="markPaid()">Mark as Paid</button>
-</div>
-
-</div>
-
 <script>
 
 /* 🍽 SAVE MENU */
@@ -195,30 +182,6 @@ function saveUpdate(){
     alert("Update Posted!");
 }
 
-/* 🎟 LOAD TOKEN INFO */
-window.onload = function(){
-
-    document.getElementById("adminToken").innerText =
-        "Token: " + (localStorage.getItem("token") || "--");
-
-    document.getElementById("adminMeal").innerText =
-        "Meal: " + (localStorage.getItem("meal") || "--");
-
-    let status = localStorage.getItem("status");
-
-    if(status === "paid"){
-        document.getElementById("adminStatus").innerText = "Status: ✅ Paid";
-    } else {
-        document.getElementById("adminStatus").innerText = "Status: ❌ Not Paid";
-    }
-}
-
-/* 🎟 MARK AS PAID */
-function markPaid(){
-    localStorage.setItem("status", "paid");
-    alert("Payment Confirmed!");
-    location.reload();
-}
 
 </script>
 
