@@ -9,26 +9,43 @@
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:Arial;
     background:#f4f6f9;
 }
 
-/* Topbar */
+/* LOGIN BOX */
+.login-box{
+    width:350px;
+    padding:30px;
+    background:white;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border-radius:10px;
+    box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+/* TOPBAR */
 .topbar{
     background:#2e7d32;
     color:white;
     padding:15px;
     font-size:22px;
-    font-weight:bold;
 }
 
-/* Sidebar */
+/* SIDEBAR */
 .sidebar{
     width:220px;
     height:100vh;
     background:#1b5e20;
     position:fixed;
-    padding-top:20px;
     top:60px;
 }
 
@@ -39,43 +56,32 @@ body{
     text-decoration:none;
 }
 
-.sidebar a:hover,
-.sidebar a.active{
+.sidebar a:hover{
     background:#2e7d32;
 }
 
-/* Main */
+/* MAIN */
 .main{
     margin-left:220px;
     padding:20px;
     margin-top:60px;
 }
 
-/* Card */
+/* CARD */
 .card{
     background:white;
     padding:20px;
-    border-radius:10px;
     margin-bottom:20px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    border-radius:10px;
 }
 
-/* Inputs */
-input, textarea{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
-}
-
-/* Button */
+/* BUTTON */
 button{
     padding:10px;
     background:#2e7d32;
     color:white;
     border:none;
-    border-radius:5px;
+    margin-top:5px;
     cursor:pointer;
 }
 
@@ -83,7 +89,7 @@ button:hover{
     background:#1b5e20;
 }
 
-/* Feedback Box */
+/* FEEDBACK BOX */
 .feedback-box{
     background:#f1f1f1;
     padding:10px;
@@ -91,19 +97,9 @@ button:hover{
     border-radius:5px;
 }
 
-/* Mobile */
-@media (max-width:768px){
-    .sidebar{
-        width:100%;
-        height:auto;
-        position:relative;
-        top:0;
-    }
-
-    .main{
-        margin-left:0;
-        margin-top:0;
-    }
+/* HIDE ADMIN INITIALLY */
+#adminContent{
+    display:none;
 }
 
 </style>
@@ -111,53 +107,54 @@ button:hover{
 
 <body>
 
-<div class="topbar">
-Admin Panel - Staff Interface
+<!-- 🔐 LOGIN -->
+<div class="login-box" id="loginBox">
+<h2>Admin Login</h2>
+
+<input type="email" id="adminEmail" placeholder="Staff Email">
+<input type="password" id="adminPass" placeholder="Password">
+
+<button onclick="adminLogin()">Login</button>
+<button onclick="resetPassword()">Forgot Password?</button>
+
+<p style="font-size:12px; color:gray;">Demo system (no real email verification)</p>
 </div>
 
+<!-- 🛠 ADMIN PANEL -->
+<div id="adminContent">
+
+<div class="topbar">Admin Panel</div>
+
 <div class="sidebar">
-<a href="#" class="active">📊 Dashboard</a>
-<a href="#menu">🍽 Update Menu</a>
-<a href="#updates">📢 Quick Updates</a>
-<a href="#feedback">📝 View Feedback</a>
+<a href="#">📊 Dashboard</a>
+<a href="#menu">🍽 Menu</a>
+<a href="#updates">📢 Updates</a>
+<a href="#feedback">📝 Feedback</a>
 </div>
 
 <div class="main">
 
-<!-- 🍽 MENU -->
+<!-- MENU -->
 <div class="card" id="menu">
-<h2>Update Daily Menu (Buffet System)</h2>
+<h2>Update Menu</h2>
 
-<label>Breakfast Items</label>
-<textarea id="breakfastItems"></textarea>
-<input type="text" id="breakfastPrice" placeholder="Total Price (₹)">
-
-<label>Lunch Items</label>
-<textarea id="lunchItems"></textarea>
-<input type="text" id="lunchPrice" placeholder="Total Price (₹)">
-
-<label>Snacks Items</label>
-<textarea id="snacksItems"></textarea>
-<input type="text" id="snacksPrice" placeholder="Total Price (₹)">
-
-<label>Dinner Items</label>
-<textarea id="dinnerItems"></textarea>
-<input type="text" id="dinnerPrice" placeholder="Total Price (₹)">
+<textarea id="breakfastItems" placeholder="Breakfast Items"></textarea>
+<input id="breakfastPrice" placeholder="Price">
 
 <button onclick="saveMenu()">Save Menu</button>
 </div>
 
-<!-- 📢 QUICK UPDATES -->
+<!-- UPDATES -->
 <div class="card" id="updates">
-<h2>Post Quick Update</h2>
+<h2>Quick Update</h2>
 
-<textarea id="updateText" placeholder="Enter update..."></textarea>
-<input type="text" id="updatePrice" placeholder="Optional Price (₹)">
+<textarea id="updateText" placeholder="Enter update"></textarea>
+<input id="updatePrice" placeholder="Optional Price">
 
 <button onclick="saveUpdate()">Post Update</button>
 </div>
 
-<!-- 📝 FEEDBACK -->
+<!-- FEEDBACK -->
 <div class="card" id="feedback">
 <h2>Student Feedback</h2>
 <div id="feedbackList"></div>
@@ -165,65 +162,101 @@ Admin Panel - Staff Interface
 
 </div>
 
+</div>
+
 <script>
+
+/* 🔐 LOGIN */
+function adminLogin(){
+
+    let email = adminEmail.value;
+    let pass = adminPass.value;
+
+    if(!email.endsWith("@staff.alliance.edu.in")){
+        alert("❌ Use staff email only!");
+        return;
+    }
+
+    let savedPass = localStorage.getItem(email);
+
+    if(savedPass === null){
+        localStorage.setItem(email, pass);
+        alert("✅ Password set successfully!");
+        showAdmin();
+    }
+    else if(savedPass === pass){
+        showAdmin();
+    }
+    else{
+        alert("❌ Wrong password!");
+    }
+}
+
+/* SHOW ADMIN PANEL */
+function showAdmin(){
+    loginBox.style.display="none";
+    adminContent.style.display="block";
+}
+
+/* 🔁 RESET PASSWORD */
+function resetPassword(){
+
+    let email = prompt("Enter your admin email");
+
+    if(!email || !email.endsWith("@staff.alliance.edu.in")){
+        alert("❌ Invalid staff email!");
+        return;
+    }
+
+    let exists = localStorage.getItem(email);
+
+    if(exists === null){
+        alert("❌ No account found!");
+        return;
+    }
+
+    let newPass = prompt("Enter new password");
+
+    if(!newPass){
+        alert("❌ Password cannot be empty!");
+        return;
+    }
+
+    localStorage.setItem(email, newPass);
+
+    alert("✅ Password reset successful!");
+}
 
 /* 🍽 SAVE MENU */
 function saveMenu(){
-
     localStorage.setItem("breakfastItems", breakfastItems.value);
     localStorage.setItem("breakfastPrice", breakfastPrice.value);
-
-    localStorage.setItem("lunchItems", lunchItems.value);
-    localStorage.setItem("lunchPrice", lunchPrice.value);
-
-    localStorage.setItem("snacksItems", snacksItems.value);
-    localStorage.setItem("snacksPrice", snacksPrice.value);
-
-    localStorage.setItem("dinnerItems", dinnerItems.value);
-    localStorage.setItem("dinnerPrice", dinnerPrice.value);
-
-    alert("✅ Menu Updated Successfully!");
+    alert("✅ Menu saved!");
 }
 
 /* 📢 SAVE UPDATE */
 function saveUpdate(){
-    let update = updateText.value;
-    let price = updatePrice.value;
-
-    if(update.trim() === ""){
-        alert("⚠️ Enter something!");
-        return;
-    }
-
-    localStorage.setItem("update", update);
-    localStorage.setItem("updatePrice", price);
+    localStorage.setItem("update", updateText.value);
+    localStorage.setItem("updatePrice", updatePrice.value);
     localStorage.setItem("updateTime", new Date().toLocaleString());
-
-    alert("📢 Update Posted Successfully!");
-
-    updateText.value = "";
-    updatePrice.value = "";
+    alert("📢 Update posted!");
 }
 
 /* 📝 LOAD FEEDBACK */
 function loadFeedback(){
+    let fb = JSON.parse(localStorage.getItem("feedbacks")) || [];
+    let out = "";
 
-    let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
-
-    let output = "";
-
-    feedbacks.forEach(f => {
-        output += `
+    fb.forEach(f=>{
+        out += `
         <div class="feedback-box">
-            <strong>${f.name}</strong><br>
+            <b>${f.name}</b><br>
             ${f.message}<br>
             <small>${f.time}</small>
-        </div>
-        `;
+        </div>`;
     });
 
-    document.getElementById("feedbackList").innerHTML =
-        output || "No feedback yet";
+    feedbackList.innerHTML = out || "No feedback yet";
 }
 
 loadFeedback();
