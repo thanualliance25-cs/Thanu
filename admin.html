@@ -30,7 +30,7 @@ body{
     background:#1b5e20;
     position:fixed;
     padding-top:20px;
-    top:60px;   /* FIX ADDED */
+    top:60px;
 }
 
 .sidebar a{
@@ -49,7 +49,7 @@ body{
 .main{
     margin-left:220px;
     padding:20px;
-    margin-top:60px;  /* FIX ADDED */
+    margin-top:60px;
 }
 
 /* Card */
@@ -112,7 +112,6 @@ Admin Panel - Staff Interface
 <a href="#" class="active">📊 Dashboard</a>
 <a href="#menu">🍽 Update Menu</a>
 <a href="#updates">📢 Quick Updates</a>
-<a href="#token">🎟 Token Control</a>
 </div>
 
 <div class="main">
@@ -166,7 +165,17 @@ function saveMenu(){
     localStorage.setItem("dinnerItems", document.getElementById("dinnerItems").value);
     localStorage.setItem("dinnerPrice", document.getElementById("dinnerPrice").value);
 
-    alert("Menu Updated Successfully!");
+    alert("✅ Menu Updated Successfully!");
+
+    // Clear inputs
+    document.getElementById("breakfastItems").value = "";
+    document.getElementById("breakfastPrice").value = "";
+    document.getElementById("lunchItems").value = "";
+    document.getElementById("lunchPrice").value = "";
+    document.getElementById("snacksItems").value = "";
+    document.getElementById("snacksPrice").value = "";
+    document.getElementById("dinnerItems").value = "";
+    document.getElementById("dinnerPrice").value = "";
 }
 
 /* 📢 SAVE UPDATE */
@@ -174,14 +183,18 @@ function saveUpdate(){
     let update = document.getElementById("updateText").value;
 
     if(update.trim() === ""){
-        alert("Enter something!");
+        alert("⚠️ Enter something!");
         return;
     }
 
     localStorage.setItem("update", update);
-    alert("Update Posted!");
-}
+    localStorage.setItem("updateTime", new Date().toLocaleString());
 
+    alert("📢 Update Posted Successfully!");
+
+    // Clear box
+    document.getElementById("updateText").value = "";
+}
 
 </script>
 
