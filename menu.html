@@ -10,7 +10,7 @@
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    background:#f4f6f9;
+    background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
 }
 
 /* Topbar */
@@ -48,16 +48,25 @@ body{
     padding:20px;
 }
 
-/* Menu Cards */
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+/* GRID */
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-.card h3{
+/* GLASS CARD */
+.menu-card{
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.menu-card h3{
     margin-top:0;
     color:#1b5e20;
 }
@@ -65,13 +74,14 @@ body{
 /* Items */
 pre{
     font-family:Arial;
-    font-size:16px;
-    line-height:1.6;
+    font-size:15px;
     white-space:pre-wrap;
+    line-height:1.6;
 }
 
 /* Price */
 .price{
+    margin-top:10px;
     font-size:18px;
     font-weight:bold;
     color:#d32f2f;
@@ -110,25 +120,27 @@ pre{
 
 <div class="main">
 
-<div class="card">
+<div class="menu-grid">
+
+<div class="menu-card">
 <h3>Breakfast</h3>
 <pre id="breakfastItems"></pre>
 <p class="price" id="breakfastPrice"></p>
 </div>
 
-<div class="card">
+<div class="menu-card">
 <h3>Lunch</h3>
 <pre id="lunchItems"></pre>
 <p class="price" id="lunchPrice"></p>
 </div>
 
-<div class="card">
+<div class="menu-card">
 <h3>Snacks</h3>
 <pre id="snacksItems"></pre>
 <p class="price" id="snacksPrice"></p>
 </div>
 
-<div class="card">
+<div class="menu-card">
 <h3>Dinner</h3>
 <pre id="dinnerItems"></pre>
 <p class="price" id="dinnerPrice"></p>
@@ -136,9 +148,11 @@ pre{
 
 </div>
 
+</div>
+
 <script>
 
-/* LOAD MENU DATA */
+/* LOAD DATA */
 
 document.getElementById("breakfastItems").innerText =
     localStorage.getItem("breakfastItems") || "Not updated";
