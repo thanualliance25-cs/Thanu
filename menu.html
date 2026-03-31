@@ -9,8 +9,8 @@
 
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background: linear-gradient(135deg,#e8f5e9,#f1f8e9);
+    font-family:Arial;
+    background: linear-gradient(135deg,#c8e6c9,#e8f5e9);
 }
 
 /* Topbar */
@@ -28,7 +28,7 @@ body{
     height:100vh;
     background:#1b5e20;
     position:fixed;
-    padding-top:20px;
+    top:60px;
 }
 
 .sidebar a{
@@ -46,24 +46,41 @@ body{
 .main{
     margin-left:220px;
     padding:20px;
+    margin-top:60px;
 }
 
-/* GRID */
+/* Banner */
+.banner{
+    background: linear-gradient(135deg,#2e7d32,#66bb6a);
+    color:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+/* Grid */
 .menu-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:20px;
 }
 
-/* GLASS CARD */
+/* Card */
 .menu-card{
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.25);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius:15px;
+    border-radius:20px;
     padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
-    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    border-left:5px solid #2e7d32;
+    transition:0.3s;
+}
+
+.menu-card:hover{
+    transform:scale(1.03);
 }
 
 .menu-card h3{
@@ -73,18 +90,16 @@ body{
 
 /* Items */
 pre{
-    font-family:Arial;
-    font-size:15px;
     white-space:pre-wrap;
-    line-height:1.6;
+    font-size:15px;
 }
 
 /* Price */
 .price{
-    margin-top:10px;
-    font-size:18px;
-    font-weight:bold;
     color:#d32f2f;
+    font-weight:bold;
+    margin-top:10px;
+    font-size:16px;
 }
 
 /* Mobile */
@@ -93,10 +108,12 @@ pre{
         width:100%;
         height:auto;
         position:relative;
+        top:0;
     }
 
     .main{
         margin-left:0;
+        margin-top:0;
     }
 }
 
@@ -105,45 +122,46 @@ pre{
 
 <body>
 
-<div class="topbar">
-🍽 Daily Menu
-</div>
+<div class="topbar">🍽 Daily Menu</div>
 
 <div class="sidebar">
 <a href="home.html">🏠 Home</a>
 <a href="canteen.html">🍛 Canteen Info</a>
 <a href="menu.html">🍽 Daily Menu</a>
 <a href="updates.html">📢 Quick Updates</a>
-<a href="feedback.html">📝 Feedback</a>
 <a href="admin.html">🛠 Admin Panel</a>
 </div>
 
 <div class="main">
 
+<div class="banner">
+🍽 Today’s Delicious Menu
+</div>
+
 <div class="menu-grid">
 
 <div class="menu-card">
-<h3>Breakfast</h3>
-<pre id="breakfastItems"></pre>
-<p class="price" id="breakfastPrice"></p>
+<h3>🍳 Breakfast</h3>
+<pre id="bItems"></pre>
+<p class="price" id="bPrice"></p>
 </div>
 
 <div class="menu-card">
-<h3>Lunch</h3>
-<pre id="lunchItems"></pre>
-<p class="price" id="lunchPrice"></p>
+<h3>🍛 Lunch</h3>
+<pre id="lItems"></pre>
+<p class="price" id="lPrice"></p>
 </div>
 
 <div class="menu-card">
-<h3>Snacks</h3>
-<pre id="snacksItems"></pre>
-<p class="price" id="snacksPrice"></p>
+<h3>☕ Snacks</h3>
+<pre id="sItems"></pre>
+<p class="price" id="sPrice"></p>
 </div>
 
 <div class="menu-card">
-<h3>Dinner</h3>
-<pre id="dinnerItems"></pre>
-<p class="price" id="dinnerPrice"></p>
+<h3>🍽 Dinner</h3>
+<pre id="dItems"></pre>
+<p class="price" id="dPrice"></p>
 </div>
 
 </div>
@@ -152,34 +170,22 @@ pre{
 
 <script>
 
-/* LOAD DATA */
+/* LOAD MENU DATA */
 
-document.getElementById("breakfastItems").innerText =
-    localStorage.getItem("breakfastItems") || "Not updated";
+bItems.innerText = localStorage.getItem("breakfastItems") || "Not updated";
+bPrice.innerText = "Price: ₹" + (localStorage.getItem("breakfastPrice") || "--");
 
-document.getElementById("breakfastPrice").innerText =
-    "Price: ₹" + (localStorage.getItem("breakfastPrice") || "--");
+lItems.innerText = localStorage.getItem("lunchItems") || "Not updated";
+lPrice.innerText = "Price: ₹" + (localStorage.getItem("lunchPrice") || "--");
 
+sItems.innerText = localStorage.getItem("snacksItems") || "Not updated";
+sPrice.innerText = "Price: ₹" + (localStorage.getItem("snacksPrice") || "--");
 
-document.getElementById("lunchItems").innerText =
-    localStorage.getItem("lunchItems") || "Not updated";
+dItems.innerText = localStorage.getItem("dinnerItems") || "Not updated";
+dPrice.innerText = "Price: ₹" + (localStorage.getItem("dinnerPrice") || "--");
 
-document.getElementById("lunchPrice").innerText =
-    "Price: ₹" + (localStorage.getItem("lunchPrice") || "--");
-
-
-document.getElementById("snacksItems").innerText =
-    localStorage.getItem("snacksItems") || "Not updated";
-
-document.getElementById("snacksPrice").innerText =
-    "Price: ₹" + (localStorage.getItem("snacksPrice") || "--");
-
-
-document.getElementById("dinnerItems").innerText =
-    localStorage.getItem("dinnerItems") || "Not updated";
-
-document.getElementById("dinnerPrice").innerText =
-    "Price: ₹" + (localStorage.getItem("dinnerPrice") || "--");
+/* ADD DATE TO BANNER */
+document.querySelector(".banner").innerText += " - " + new Date().toDateString();
 
 </script>
 
