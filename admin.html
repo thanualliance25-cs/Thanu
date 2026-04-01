@@ -1,317 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
 
-<style>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            height: 100vh;
+            background: url('campus-banner.jpg') no-repeat center center;
+            background-size: cover;
+        }
 
-/* BODY WITH BACKGROUND */
-body{
-    margin:0;
-    font-family:Arial;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                url('campus-banner.jpg') no-repeat center center;
-    background-size: cover;
-}
+        .login-box {
+            width: 350px;
+            padding: 40px;
+            position: absolute;
+            top: 50%;
+            left: 10%; /* left-aligned */
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            color: black;
+            text-align: center;
+        }
 
-/* 🔐 LOGIN BOX (GLASS EFFECT) */
-.login-box{
-    width:350px;
-    padding:30px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    border-radius:15px;
-    box-shadow:0 0 25px rgba(0,0,0,0.5);
-    color:white;
-}
+        .login-box h2 {
+            margin-bottom: 20px;
+        }
 
-.login-box h2{
-    text-align:center;
-}
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-.login-box input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:5px;
-    border:none;
-}
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.login-box button{
-    width:100%;
-    margin-top:10px;
-}
+        .login-box button:hover {
+            background: #c82333;
+        }
 
-/* 🛠 ADMIN PANEL (hidden initially) */
-#adminContent{
-    display:none;
-    background:#f4f6f9;
-    min-height:100vh;
-}
+        .login-box a {
+            color: #007bff;
+            text-decoration: none;
+        }
 
-/* TOPBAR */
-.topbar{
-    background:#2e7d32;
-    color:white;
-    padding:15px;
-    font-size:22px;
-    font-weight:bold;
-}
+        .login-box a:hover {
+            text-decoration: underline;
+        }
 
-/* SIDEBAR */
-.sidebar{
-    width:220px;
-    height:100vh;
-    background:#1b5e20;
-    position:fixed;
-    top:60px;
-}
-
-.sidebar a{
-    display:block;
-    color:white;
-    padding:15px;
-    text-decoration:none;
-}
-
-.sidebar a:hover{
-    background:#2e7d32;
-}
-
-/* MAIN */
-.main{
-    margin-left:220px;
-    padding:20px;
-    margin-top:60px;
-}
-
-/* CARD */
-.card{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-/* INPUTS */
-textarea, input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
-}
-
-/* BUTTON */
-button{
-    padding:10px;
-    background:#2e7d32;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#1b5e20;
-}
-
-/* FEEDBACK BOX */
-.feedback-box{
-    background:#f1f1f1;
-    padding:10px;
-    margin:10px 0;
-    border-radius:5px;
-}
-
-</style>
+        .forgot-password {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- 🔐 LOGIN -->
-<div class="login-box" id="loginBox">
-<h2>Admin Login</h2>
-
-<input type="email" id="adminEmail" placeholder="Staff Email">
-<input type="password" id="adminPass" placeholder="Password">
-
-<button onclick="adminLogin()">Login</button>
-<button onclick="resetPassword()">Forgot Password?</button>
-
-<p style="font-size:12px; color:#eee; text-align:center;">
-Demo system (no real email verification)
-</p>
-</div>
-
-<!-- 🛠 ADMIN PANEL -->
-<div id="adminContent">
-
-<div class="topbar">Admin Panel</div>
-
-<div class="sidebar">
-<a href="#">📊 Dashboard</a>
-<a href="#menu">🍽 Menu</a>
-<a href="#updates">📢 Updates</a>
-<a href="#feedback">📝 Feedback</a>
-</div>
-
-<div class="main">
-
-<!-- MENU -->
-<div class="card" id="menu">
-<h2>Update Menu</h2>
-
-<textarea id="breakfastItems" placeholder="Breakfast Items"></textarea>
-<input id="breakfastPrice" placeholder="Total Price">
-
-<button onclick="saveMenu()">Save Menu</button>
-</div>
-
-<!-- UPDATES -->
-<div class="card" id="updates">
-<h2>Quick Update</h2>
-
-<textarea id="updateText" placeholder="Enter update"></textarea>
-<input id="updatePrice" placeholder="Optional Price">
-
-<button onclick="saveUpdate()">Post Update</button>
-</div>
-
-<!-- FEEDBACK -->
-<div class="card" id="feedback">
-<h2>Student Feedback</h2>
-<div id="feedbackList"></div>
-</div>
-
-</div>
-
+<div class="login-box">
+    <h2>Admin Login</h2>
+    <input type="email" placeholder="Admin Email ID" id="adminEmail">
+    <input type="password" placeholder="Password" id="adminPassword">
+    <button onclick="adminLogin()">Login</button>
+    
+    <div class="forgot-password">
+        <a href="#" onclick="forgotPassword()">Forgot Password?</a>
+    </div>
 </div>
 
 <script>
+function adminLogin() {
+    var email = document.getElementById('adminEmail').value.trim();
+    var password = document.getElementById('adminPassword').value;
 
-/* 🔐 LOGIN */
-function adminLogin(){
-
-    let email = adminEmail.value;
-    let pass = adminPass.value;
-
-    if(!email.endsWith("@staff.alliance.edu.in")){
-        alert("❌ Use staff email only!");
+    if(!email.endsWith("@alliance.edu.in")){
+        alert("Enter valid Admin email");
         return;
     }
 
-    let savedPass = localStorage.getItem(email);
+    var savedPassword = localStorage.getItem(email);
 
-    if(savedPass === null){
-        localStorage.setItem(email, pass);
-        alert("✅ Password set successfully!");
-        showAdmin();
+    if(savedPassword === null){
+        localStorage.setItem(email, password);
+        alert("Password set successfully. Use same password next time.");
+        window.location.href = "admin-home.html";
     }
-    else if(savedPass === pass){
-        showAdmin();
+    else if(savedPassword === password){
+        window.location.href = "admin-home.html";
     }
     else{
-        alert("❌ Wrong password!");
+        alert("Wrong password for this admin");
     }
 }
 
-/* SHOW ADMIN PANEL */
-function showAdmin(){
-    loginBox.style.display="none";
-    adminContent.style.display="block";
-}
+// Forgot password function for admin
+function forgotPassword() {
+    var email = prompt("Enter your admin email to reset password:");
 
-/* 🔁 RESET PASSWORD */
-function resetPassword(){
-
-    let email = prompt("Enter your admin email");
-
-    if(!email || !email.endsWith("@staff.alliance.edu.in")){
-        alert("❌ Invalid staff email!");
+    if(!email || !email.endsWith("@alliance.edu.in")) {
+        alert("Enter a valid Admin email");
         return;
     }
 
-    let exists = localStorage.getItem(email);
+    var savedPassword = localStorage.getItem(email);
 
-    if(exists === null){
-        alert("❌ No account found!");
-        return;
+    if(savedPassword === null){
+        alert("No account found with this email.");
+    } else {
+        var newPassword = prompt("Enter your new password:");
+        if(newPassword){
+            localStorage.setItem(email, newPassword);
+            alert("Password reset successfully. Use new password to login.");
+        }
     }
-
-    let newPass = prompt("Enter new password");
-
-    if(!newPass){
-        alert("❌ Password cannot be empty!");
-        return;
-    }
-
-    localStorage.setItem(email, newPass);
-
-    alert("✅ Password reset successful!");
 }
-
-/* 🍽 SAVE MENU */
-function saveMenu(){
-    localStorage.setItem("breakfastItems", breakfastItems.value);
-    localStorage.setItem("breakfastPrice", breakfastPrice.value);
-    alert("✅ Menu saved!");
-}
-
-/* 📢 SAVE UPDATE (MULTIPLE UPDATES) */
-function saveUpdate(){
-
-    let text = updateText.value;
-    let price = updatePrice.value;
-
-    if(text.trim() === ""){
-        alert("Enter update!");
-        return;
-    }
-
-    let updates = JSON.parse(localStorage.getItem("updatesList")) || [];
-
-    updates.push({
-        text: text,
-        price: price,
-        time: new Date().toLocaleString()
-    });
-
-    localStorage.setItem("updatesList", JSON.stringify(updates));
-
-    alert("📢 Update posted!");
-
-    updateText.value = "";
-    updatePrice.value = "";
-}
-
-/* 📝 LOAD FEEDBACK */
-function loadFeedback(){
-    let fb = JSON.parse(localStorage.getItem("feedbacks")) || [];
-    let out = "";
-
-    fb.forEach(f=>{
-        out += `
-        <div class="feedback-box">
-            <b>${f.name}</b><br>
-            ${f.message}<br>
-            <small>${f.time}</small>
-        </div>`;
-    });
-
-    feedbackList.innerHTML = out || "No feedback yet";
-}
-
-loadFeedback();
-
 </script>
 
 </body>
