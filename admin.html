@@ -13,7 +13,7 @@ background:url('campus-banner.jpg') no-repeat center center;
 background-size:cover;
 }
 
-/* LOGIN BOX LEFT */
+/* LOGIN BOX */
 .login-box{
 width:350px;
 padding:40px;
@@ -68,7 +68,7 @@ margin:5px 0;
 background:#fff;
 padding:15px;
 border-radius:10px;
-max-height:200px;
+max-height:250px;
 overflow:auto;
 }
 </style>
@@ -137,36 +137,37 @@ overflow:auto;
 </div>
 
 <script>
+
 function login(){
-let email=adminEmail.value.trim();
-let pass=adminPassword.value;
+let email = adminEmail.value.trim();
+let pass = adminPassword.value;
 
 if(!email.endsWith("@alliance.edu.in")){
 alert("Use admin email");
 return;
 }
 
-let saved=localStorage.getItem(email);
+let saved = localStorage.getItem(email);
 
-if(saved==null){
-localStorage.setItem(email,pass);
+if(saved == null){
+localStorage.setItem(email, pass);
 }
 
-if(localStorage.getItem(email)==pass){
-loginBox.style.display="none";
-adminPanel.style.display="block";
+if(localStorage.getItem(email) == pass){
+loginBox.style.display = "none";
+adminPanel.style.display = "block";
 }else{
 alert("Wrong password");
 }
 }
 
 function forgotPassword(){
-let email=prompt("Enter admin email");
+let email = prompt("Enter admin email");
 if(!email) return;
 
-let newPass=prompt("Enter new password");
+let newPass = prompt("Enter new password");
 if(newPass){
-localStorage.setItem(email,newPass);
+localStorage.setItem(email, newPass);
 alert("Password updated");
 }
 }
@@ -188,32 +189,39 @@ alert("Menu updated successfully");
 }
 
 function addUpdate(){
-let updates=JSON.parse(localStorage.getItem("updatesList")) || [];
+let updates = JSON.parse(localStorage.getItem("updatesList")) || [];
 
 updates.push({
-text:updateText.value,
-price:updatePrice.value,
-time:new Date().toLocaleString()
+text: updateText.value,
+price: updatePrice.value,
+time: new Date().toLocaleString()
 });
 
-localStorage.setItem("updatesList",JSON.stringify(updates));
+localStorage.setItem("updatesList", JSON.stringify(updates));
 
 alert("Update added successfully");
 }
 
 function loadFeedback(){
-let feedback=JSON.parse(localStorage.getItem("feedbackList")) || [];
+let feedback = JSON.parse(localStorage.getItem("feedbacks")) || [];
 
-if(feedback.length===0){
-feedbackBox.innerHTML="No feedback yet";
+if(feedback.length === 0){
+feedbackBox.innerHTML = "No feedback yet";
 return;
 }
 
-feedbackBox.innerHTML="";
-feedback.forEach(f=>{
-feedbackBox.innerHTML += "<p>• "+f+"</p>";
+feedbackBox.innerHTML = "";
+
+feedback.forEach(f => {
+feedbackBox.innerHTML += `
+<div style="border-bottom:1px solid #ccc; margin-bottom:10px; padding-bottom:10px;">
+<b>${f.name}</b><br>
+${f.message}<br>
+<small>${f.time}</small>
+</div>`;
 });
 }
+
 </script>
 
 </body>
